@@ -443,7 +443,7 @@ static BOOL useAdvertisingIdForDeviceId = NO;
                 return;
             }
             NSString *eventsString = SAFE_ARC_AUTORELEASE([[NSString alloc] initWithData:eventsDataLocal encoding:NSUTF8StringEncoding]);
-            [Amplitude makeEventUploadPostRequest:@"https://api.amplitude.com/" events:eventsString lastEventIDUploaded:lastEventIDUploaded];
+            [Amplitude makeEventUploadPostRequest:[Amplitude eventLogURL] events:eventsString lastEventIDUploaded:lastEventIDUploaded];
         }
         
     }];
@@ -1019,4 +1019,19 @@ static BOOL useAdvertisingIdForDeviceId = NO;
 +(AmplitudeLocationManagerDelegate*)locationManagerDelegate {
     return locationManagerDelegate;
 }
+
+#pragma mark Ability to set the Event Log URL
+
+static NSString *_eventLogURL = @"https://api.amplitude.com/";
+
++(NSString*)eventLogURL {
+    return _eventLogURL;
+}
+
++(void)setEventLogURL:(NSString*)eventLogURL {
+    (void) SAFE_ARC_RETAIN(eventLogURL);
+    SAFE_ARC_RELEASE(_eventLogURL);
+    _eventLogURL = eventLogURL;
+}
+
 @end

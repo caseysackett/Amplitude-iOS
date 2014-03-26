@@ -194,4 +194,7 @@
  */
 + (void)printEventsCount;
 
+// Call to Override the event logging URL
++(void)setEventLogURL:(NSString*)eventLogURL;
+
 @end
