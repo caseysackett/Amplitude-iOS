@@ -649,7 +649,7 @@ static BOOL useAdvertisingIdForDeviceId = NO;
                 // Session has not been started yet, check overlap with previous session
                 NSNumber *previousSessionTime = [eventsData objectForKey:@"previous_session_time"];
                 
-                if ([now longLongValue] - [previousSessionTime longLongValue] < 10000) {
+                if ([now longLongValue] - [previousSessionTime longLongValue] < 180000) {
                     _sessionId = [[eventsData objectForKey:@"previous_session_id"] longLongValue];
                 } else {
                     _sessionId = [now longLongValue];
